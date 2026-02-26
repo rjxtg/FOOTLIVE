@@ -1,104 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secure Gateway</title>
-
+<title>FOOTLIVE</title>
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#0f0f0f;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
+body{margin:0;background:black;}
+iframe{
+width:100%;
 height:100vh;
-text-align:center;
-}
-.box{
-background:#111;
-padding:40px;
-border-radius:20px;
-width:90%;
-max-width:400px;
-box-shadow:0 0 30px rgba(0,255,150,0.2);
-}
-.loader{
-width:60px;
-height:60px;
-border:5px solid #222;
-border-top:5px solid #00ff99;
-border-radius:50%;
-margin:20px auto;
-animation:spin 1s linear infinite;
-}
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
-button{
-margin-top:20px;
-padding:12px 25px;
 border:none;
-border-radius:30px;
-background:#00ff99;
-color:black;
-font-weight:bold;
-cursor:pointer;
-}
-.count{
-font-size:28px;
-color:#00ff99;
-font-weight:bold;
 }
 </style>
 </head>
-
 <body>
 
-<div class="box">
-<h2>Secure Stream Gateway</h2>
-<div class="loader"></div>
-<p>Redirecting in <span class="count" id="count">5</span>s</p>
-<button onclick="redirectNow()">Click Here To Watch</button>
-</div>
-
-<script>
-
-// Decode Base64 link
-const params = new URLSearchParams(window.location.search);
-const encoded = params.get("data");
-
-let target = "";
-try{
-  target = atob(encoded);
-}catch(e){
-  document.body.innerHTML="<h2>Invalid Link</h2>";
-}
-
-// Countdown
-let timeLeft = 5;
-const countEl = document.getElementById("count");
-
-const timer = setInterval(()=>{
-  timeLeft--;
-  countEl.textContent = timeLeft;
-  if(timeLeft <= 0){
-    clearInterval(timer);
-    redirectNow();
-  }
-},1000);
-
-function redirectNow(){
-  if(target){
-    window.location.href = target;
-  }else{
-    alert("Stream not found.");
-  }
-}
-
-</script>
+<iframe src="https://cricketstan.github.io/Channel-14/" allowfullscreen></iframe>
 
 </body>
 </html>
