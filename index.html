@@ -1,63 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Shaka Player</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Shaka Player CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.6/shaka-player.compiled.js"></script>
-
+  <meta charset="utf-8">
+  <title>DASH Video Player</title>
+  <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
   <style>
     body {
-      margin: 0;
-      background: #000;
+      background-color: #111;
+      color: white;
+      text-align: center;
       font-family: Arial, sans-serif;
     }
-
-    .player-container {
-      width: 100%;
-      max-width: 100%;
-      margin: auto;
-      position: relative;
-    }
-
     video {
-      width: 100%;
-      height: 100vh;
-      background: black;
+      width: 80%;
+      max-width: 900px;
+      margin-top: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
   </style>
 </head>
-
 <body>
 
-<div class="player-container">
-  <video id="video" controls autoplay></video>
-</div>
+  <h2>MPEG-DASH Stream Player</h2>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    shaka.polyfill.installAll();
+  <video id="videoPlayer" controls autoplay></video>
 
-    if (shaka.Player.isBrowserSupported()) {
-      var video = document.getElementById('video');
-      var player = new shaka.Player(video);
-
-      // 🔗 PUT YOUR STREAM LINK HERE
-      var manifestUri = "https://edge2.roarzone.info:444/roarzone/edge2/sony-sports-2-hd/index.m3u8?token=4694e54d7151e145fcd9545189d3aa9e69682970-3f24e5999afabc776735cf64f5c2a6bd-1771778252-1771767452";
-
-      player.load(manifestUri).then(function () {
-        console.log('Video loaded successfully!');
-      }).catch(function (error) {
-        console.error('Error loading video', error);
-      });
-
-    } else {
-      alert('Browser not supported!');
-    }
-  });
-</script>
+  <script>
+    var url = "https://bbb.exoadash.com/TVD1451/index.mpd";
+    var player = dashjs.MediaPlayer().create();
+    player.initialize(document.querySelector("#videoPlayer"), url, true);
+  </script>
 
 </body>
 </html>
