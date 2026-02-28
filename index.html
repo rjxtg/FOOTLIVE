@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FOOTLIVE</title>
-<style>
-body{margin:0;background:black;}
-iframe{
-width:100%;
-height:100vh;
-border:none;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Shaka Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Shaka Player CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.6/shaka-player.compiled.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    .player-container {
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      height: 100vh;
+      background: black;
+    }
+  </style>
 </head>
+
 <body>
 
-<iframe src="https://allrounder-cricketstan.wasmer.app/prame.html" allowfullscreen></iframe>
+<div class="player-container">
+  <video id="video" controls autoplay></video>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    shaka.polyfill.installAll();
+
+    if (shaka.Player.isBrowserSupported()) {
+      var video = document.getElementById('video');
+      var player = new shaka.Player(video);
+
+      // 🔗 PUT YOUR STREAM LINK HERE
+      var manifestUri = "https://edge2.roarzone.info:444/roarzone/edge2/sony-sports-2-hd/index.m3u8?token=4694e54d7151e145fcd9545189d3aa9e69682970-3f24e5999afabc776735cf64f5c2a6bd-1771778252-1771767452";
+
+      player.load(manifestUri).then(function () {
+        console.log('Video loaded successfully!');
+      }).catch(function (error) {
+        console.error('Error loading video', error);
+      });
+
+    } else {
+      alert('Browser not supported!');
+    }
+  });
+</script>
 
 </body>
 </html>
